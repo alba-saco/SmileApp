@@ -1,0 +1,69 @@
+<ion-header>
+    <ion-title style="background-color:#d8d8d8; padding: 1%">
+        <ion-item color="#d8d8d8" lines="none">
+            <p style="margin-left: auto; margin-right: auto; color: #6AC5FE; font-size: 34px">Reminders</p>
+        </ion-item>
+    </ion-title>
+    <ion-fab vertical="top" horizontal="start">
+        <ion-fab-button style="--background: none; --box-shadow: none; --color: #6ac5fe;">
+            <ion-icon (click)="back()" name="arrow-back"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <ion-list style="margin-top: 3%; font-size: 100%;">
+        <ion-list-header style="font-size: 100%;">
+            <ion-img src = "../assets/img/toothbrush_icon.png" style="width: 10%; height: auto;"></ion-img>
+            <ion-label>Brush</ion-label>
+            <ion-item lines="none" style="margin-right: 7%; font-size: 100%;">
+                <ion-select (ionChange)="brushFrequency($event)" interface="popover">
+                    <ion-select-option *ngFor="let chosenFrequency of frequency">{{chosenFrequency}}</ion-select-option>
+                </ion-select>
+                <ion-label>times a day</ion-label>
+            </ion-item>
+        </ion-list-header>
+        <ion-item *ngFor="let breminder of brushRemindrNo; let i = index">
+            <ion-label lines="none"></ion-label>
+            <ion-datetime placeholder="choose a time" displayFormat="HH:mm" [(ngModel)]="brushRemindrNo[i]"></ion-datetime>
+        </ion-item>
+        <ion-list-header style="margin-top: 7%; font-size: 100%;">
+            <ion-img src = "../assets/img/floss.png" style="width: 10%; height: auto;"></ion-img>
+            <ion-label>Floss</ion-label>
+            <ion-item lines="none" style="margin-right: 7%; font-size: 100%;">
+                <ion-select (ionChange)="flossFrequency($event)" interface="popover">
+                    <ion-select-option *ngFor="let chosenFrequency of frequency">{{chosenFrequency}}</ion-select-option>
+                </ion-select>
+                <ion-label>times a day</ion-label>
+            </ion-item>
+        </ion-list-header>
+        <ion-item *ngFor="let freminder of flossRemindrNo; let i = index">
+            <ion-label lines="none"></ion-label>
+            <ion-datetime placeholder="choose a time" displayFormat="HH:mm" [(ngModel)]="flossRemindrNo[i]"></ion-datetime>
+        </ion-item>
+        <ion-list-header style="margin-top: 7%; font-size: 95%;">
+            <ion-img src = "../assets/img/replace_toothbrush.png" style="width: 10%; height: auto;"></ion-img>
+            <ion-label style="margin-right: 32%;">Replace Toothbrush <br> Every</ion-label>
+        </ion-list-header>
+        <ion-item lines="none" style="margin-left: 18%;">
+            <ion-select interface="popover" [(ngModel)]="replaceEn">
+                <ion-select-option *ngFor="let chosenFrequency of frequency">{{chosenFrequency}}</ion-select-option>
+            </ion-select>
+            <ion-label style="font-size: 100%;">months</ion-label>
+        </ion-item>
+        <ion-list-header style="margin-top: 7%; font-size: 95%;">
+            <ion-img src = "../assets/img/dentist.png" style="width: 10%; height: auto;"></ion-img>
+            <ion-label style="margin-right: 29%;">Dentist Appointment <br> Every</ion-label>
+        </ion-list-header>
+        <ion-item lines="none" style="margin-left: 18%;">
+            <ion-select interface="popover" [(ngModel)]="dentistEn">
+                <ion-select-option *ngFor="let chosenFrequency of ['0', '1', '2', '3', '6']">{{chosenFrequency}}</ion-select-option>
+            </ion-select>
+            <ion-label style="font-size: 100%;">months</ion-label>
+        </ion-item>
+    </ion-list>
+    <ion-row>
+        <ion-button (click)="saveReminders()" expand="block" size="medium" style="margin-top: 7%; margin-left: auto; margin-right: -10%; color: white; --border-color: #6ac5fe; --background: #6ac5fe"> Save </ion-button>
+        <ion-button (click)="cancelReminders()" expand="block" size="medium" style="margin-top: 7%; margin-left: auto; margin-right: 10%; color: white; --border-color: #6ac5fe; --background: #6ac5fe"> Cancel All </ion-button>
+    </ion-row>
+</ion-content>

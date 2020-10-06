@@ -1,0 +1,8 @@
+{
+  "name": "SmileApp",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,25 @@
+<ion-header style="background:#fff">
+    <ion-img src="../assets/img/smile_logo.jpg" style="margin-left: auto; margin-top: 5%; margin-right: auto; width: 40%; height: auto; box-shadow: none;"></ion-img>
+    <ion-fab vertical="top" horizontal="start">
+        <ion-fab-button style="--background: none; --box-shadow: none; --color: #6ac5fe;">
+            <ion-icon (click)="back()" name="arrow-back"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row style="margin-top: 3%">
+            <p style="color: #6ac5fe; margin-left: auto; margin-right: auto; text-align: center; font-size: 140%;">Now, let's setup some reminders for you!</p>
+        </ion-row>
+        <ion-row>
+            <ion-button (click)="reminders()" expand="block" size="large" style="margin-top: 5%; margin-left: auto; margin-right: auto; color: white; --border-color: #6ac5fe; --background: #6ac5fe"> Continue </ion-button>
+        </ion-row>
+        <ion-row style="margin-top: 10%">
+            <p (click)="home()" style="color: blue; margin-left: auto; margin-right: auto; text-align: center; text-decoration: underline; font-size: 85%;">Skip</p>
+        </ion-row>
+        <ion-row style="margin-top: 1%">
+            <p style="color: black; margin-left: 5%; margin-right: 5%; text-align: center; font-size: 85%;">(You can always find the reminders at Settings later.)</p>
+        </ion-row>
+    </ion-grid>
+</ion-content>

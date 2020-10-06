@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-title style="background-color:#d8d8d8">
+    <ion-item color="#d8d8d8" lines="none">
+      <ion-buttons fill="clear" size="small" slot="start">
+        <ion-back-button style="--color: #6AC5FE"></ion-back-button>
+      </ion-buttons>
+      <p style="color: #6AC5FE; font-size: 34px">Chapter {{(chapter | async)?.chapter_number}}</p>
+    </ion-item>
+  </ion-title>
+</ion-header>
+
+<ion-content>
+
+  <h3 style="color: #6AC5FE; text-align: center; font-family: 'Lucida Console', Monaco, monospace; text-decoration: underline; font-size: 25px">{{(chapter | async)?.chapter_title}}</h3>
+  <iframe width="400" height=250 [src]="((content | async)?.video_url) | safe" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <p style= "margin: 10px; border: solid; padding: 10px">{{(content | async)?.video_description}}</p>
+
+</ion-content>

@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-title style="background-color:#d8d8d8; padding: 1%">
+        <ion-item color="#d8d8d8" lines="none">
+            <p style="margin-left: auto; margin-right: auto; color: #6AC5FE; font-size: 34px">Settings</p>
+        </ion-item>
+    </ion-title>
+    <ion-fab vertical="top" horizontal="start">
+        <ion-fab-button style="--background: none; --box-shadow: none; --color: #6ac5fe;">
+            <ion-icon (click)="back()" name="arrow-back"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-header>
+
+<ion-content>
+    <ion-list style="margin-top: 5%; font-size: 20px">
+        <ion-item (click)="reminders()" style="margin-bottom: 5%;">
+            <ion-img src = "../assets/img/reminder.png" style="width: 7%; height: auto; margin-left: 3%; margin-right: 5%;"></ion-img>
+            <ion-label>Reminders</ion-label>
+        </ion-item>
+        <ion-item (click)="personalInfo()" style="margin-top: 5%; margin-bottom: 5%;">
+            <ion-img src = "../assets/img/details-icon.png" style="width: 7%; height: auto; margin-left: 3%; margin-right: 5%;"></ion-img>
+            <ion-label>Personal Information</ion-label>
+        </ion-item>
+        <ion-item (click)="managePassword()" style="margin-top: 5%; margin-bottom: 5%;">
+            <ion-img src = "../assets/img/key_and_lock.png" style="width: 7%; height: auto; margin-left: 3%; margin-right: 5%;"></ion-img>
+            <ion-label>Manage Password</ion-label>
+        </ion-item>
+        <ion-item (click)="privacyAgreement()" style="margin-top: 5%; margin-bottom: 5%;">
+            <ion-img src = "../assets/img/Digital-Signature-blue.png" style="width: 7%; height: auto; margin-left: 3%; margin-right: 5%;"></ion-img>
+            <ion-label>Privacy Terms</ion-label>
+        </ion-item>
+    </ion-list>
+    <ion-row style="margin-top: 10%">
+        <ion-button (click)="logout()" expand="block" size="large" style="margin-top: 30px; margin-left: auto; margin-right: auto; color: white; --border-color: #6ac5fe; --background: #6ac5fe"> Log out </ion-button>
+    </ion-row>
+</ion-content>

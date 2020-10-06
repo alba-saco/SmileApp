@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-title style="background-color:#d8d8d8; padding: 1%">
+      <ion-item color="#d8d8d8" lines="none">
+          <p style="margin-left: auto; margin-right: auto; color: #6AC5FE; font-size: 34px">Personal Info</p>
+      </ion-item>
+  </ion-title>
+  <ion-fab vertical="top" horizontal="start">
+      <ion-fab-button style="--background: none; --box-shadow: none; --color: #6ac5fe;">
+          <ion-icon (click)="back()" name="arrow-back"></ion-icon>
+      </ion-fab-button>
+  </ion-fab>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-item lines="none">
+      <ion-label style="color: black; margin-top: 8%; font-size: 150%; text-align: center;"> Change your info below </ion-label>
+    </ion-item>
+    <ion-row style="margin-top: 6%; color: black; margin-left: 7%; font-size: 100%;">
+      <ion-img src="../assets/img/person-icon.png" style="width: 7%; height: auto;"></ion-img>
+      <p style="color: black; margin-left: 3%; font-size: 100%;">First Name: </p>
+      <ion-input style="margin-left: 1%; font-size: 100%" placeholder="{{ this.firstName$.value }}" autocomplete="off" [(ngModel)]="postData.firstName" type="text"></ion-input>
+    </ion-row>
+    <ion-row style="margin-top: 3%; color: black; margin-left: 14%; font-size: 100%;">
+      <p style="color: black; margin-left: 3%; font-size: 100%;">Last Name: </p>
+      <ion-input style="margin-left: 1%; font-size: 100%" placeholder="{{ this.lastName$.value }}" autocomplete="off" [(ngModel)]="postData.lastName" type="text"></ion-input>
+    </ion-row>
+    <ion-row style="margin-top: 3%; color: black; margin-left: 7%; font-size: 100%;">
+      <ion-img src="../assets/img/email-icon.png" style="width: 7%; height: auto; float: right;"></ion-img>
+      <p style="color: black; margin-left: 3%; font-size: 100%;">Email: </p>
+      <ion-input style="margin-left: 1%; font-size: 100%" placeholder="{{ this.email$.value }}" autocomplete="off" [(ngModel)]="postData.email" type="email"></ion-input>
+    </ion-row>
+    <p style="margin-top: 8%; color: #6ac5fe; font-size: 75%; text-align: center;">(Please note! You will be logged out <br> after the information has been changed.) </p>
+    <ion-row style="margin-top: 10%; color: black; margin-left: 7%; font-size: 75%;">
+      <pre>Joined  </pre>
+      <ion-img src="../assets/img/smile_logo.png" style="width: 10%; height: auto;"></ion-img>
+      <pre>  since {{ this.start_date$.value }}</pre>
+    </ion-row>
+    <ion-row>
+      <ion-button (click)="saveChanges()" expand="block" size="medium" style="margin-top: 7%; margin-left: auto; margin-right: 7%; color: white; --border-color: #6ac5fe; --background: #6ac5fe"> Save </ion-button>
+  </ion-row>
+  </ion-grid>
+</ion-content>

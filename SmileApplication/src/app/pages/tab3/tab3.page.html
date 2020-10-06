@@ -1,0 +1,21 @@
+<ion-header style="box-shadow: none">
+  <ion-img src = "../assets/img/header_blank.jpg"></ion-img>
+  <ion-title style="transform: translate(-50%, -50%); position: absolute; top: 50%; left: 50%; color:white; font-size: 35px; font-family: 'Lucida Console', Monaco, monospace">Quizzes</ion-title>
+
+  <ion-fab vertical="top" horizontal = "end">
+    <ion-fab-button (click)="settings()" style="--background: none; --box-shadow: none">
+      <ion-img src="../assets/img/gear.png" style="width: 50% ; height: auto"></ion-img>
+    </ion-fab-button>
+  </ion-fab>
+</ion-header>
+
+<ion-content>
+  <ion-item *ngFor="let topic of topicsList">
+    <ion-img src="{{topic.category_image_url}}" slot="start" style="width: 15% ; height: auto"></ion-img>
+    <ion-button [routerLink]="['tab3-topicpage', topic.category_id]" expand="full"
+    fill="none" size="large" style="color: #525051; --padding-top: 20px; font-size: 18px; font-family: 'Lucida Console', Monaco, monospace"> 
+      {{topic.category_name}}
+    </ion-button>
+    <ion-img src="../assets/img/next.png" slot="end" style="width: 15% ; height: auto"></ion-img>
+  </ion-item>
+</ion-content>

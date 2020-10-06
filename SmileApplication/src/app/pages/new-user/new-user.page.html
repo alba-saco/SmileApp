@@ -1,0 +1,40 @@
+<ion-header style="background:#fff">
+    <ion-img src="../assets/img/smile_logo.jpg" style="margin-left: auto; margin-top: 5%; margin-right: auto; width: 40%; height: auto; box-shadow: none;"></ion-img>
+    <ion-fab vertical="top" horizontal="start">
+        <ion-fab-button style="--background: none; --box-shadow: none; --color: #6ac5fe;">
+            <ion-icon (click)="back()" name="arrow-back"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row style="margin-top: 2%">
+            <p style="color: #6ac5fe; margin-top: 3%; margin-left: auto; margin-right: auto; text-align: center; font-size: 180%;">Let's register!</p>
+        </ion-row>
+        <ion-row style="margin-top: 0%">
+            <p style="color: black; margin-left: 13%; font-size: 75%;">First name: </p>
+            <ion-input style="margin-left: 20px; font-size: 75%" placeholder="Enter here" autocomplete="off" [(ngModel)]="postData.firstName" type="text"></ion-input>
+        </ion-row>
+        <ion-row style="margin-top: 2%">
+            <p style="color: black; margin-left: 13%; font-size: 75%;">Last name: </p>
+            <ion-input style="margin-left: 20px; font-size: 75%" placeholder="Enter here" autocomplete="off" [(ngModel)]="postData.lastName" type="text"></ion-input>
+        </ion-row>
+        <ion-row style="margin-top: 2%">
+            <p style="color: black; margin-left: 13%; font-size: 75%;">Email address: </p>
+            <ion-input style="margin-left: 10px; font-size: 75%" placeholder="Enter your email address here" autocomplete="off" [(ngModel)]="postData.email" type="email"></ion-input>
+        </ion-row>
+        <ion-row style="margin-top: 2%">
+            <p style="color: black; margin-left: 13%; font-size: 75%;">Password: </p>
+            <ion-input style="margin-left: 10px; font-size: 75%" placeholder="Enter your password here" autocomplete="off" [(ngModel)]="postData.password" type="password"></ion-input>
+        </ion-row>
+        <p style="color: #6ac5fe; margin-left: 13%; font-size: 65%;">(At least 4 characters) </p>
+        <ion-row style="margin-top: 2%">
+            <p style="color: black; margin-left: 13%; font-size: 75%;">Confirm password: </p>
+            <ion-input style="margin-left: 10px; font-size: 75%" placeholder="Confirm the password here" autocomplete="off" [(ngModel)]="postData.confirmPassword" type="password"></ion-input>
+        </ion-row>
+        <ion-row style="margin-top: 0%">
+            <ion-button [disabled]="validateInputs() !== true" (click)="Signup()" expand="block" size="large" style="margin-top: 30px; margin-left: auto; margin-right: auto; color: white; --border-color: #6ac5fe; --background: #6ac5fe"> Continue </ion-button>
+        </ion-row>
+    </ion-grid>
+</ion-content>

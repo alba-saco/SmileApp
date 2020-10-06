@@ -1,0 +1,209 @@
+<?php
+// The visual display of the table in this file has been adapted from https://datatables.net/manual/installation
+// The Javascript Function Datatable has been adapted from https://datatables.net/manual/installation
+
+// Start the session
+session_start();
+
+// Ensure the user is logged in
+if (!isset($_SESSION['userID'])){
+    header("location: login.php");
+}
+
+// Get the databse connection
+include "config.php";
+
+//Identify the user
+$userID = $_SESSION['userID'];
+
+//initiating variables
+$error_message = "";
+$styleDisappear = "";
+$chapterExist = "";
+$validSubmission = "";
+
+// Retrieving the existing categories and respective chapters from the database, for which quizzes exist
+$catchap_query = "SELECT quiz.chapter_id AS quizChapterID, chapChapterID, catCategoryID, category_name, chapter_title, chapter_number
+                  FROM smiledatabase.quiz AS quiz
+                  INNER JOIN(
+                      SELECT *
+                      FROM(
+                      SELECT cat.category_id AS catCategoryID, category_name, chap.chapter_id AS chapChapterID, chap.category_id AS chapCategoryID, chapter_title, chapter_number 
+                      FROM smiledatabase.chapter as chap
+                      LEFT JOIN smiledatabase.category AS cat ON cat.category_id = chap.category_id
+                      ) AS catchap
+                  ) catchap ON catchap.chapChapterID = quiz.chapter_id";
+
+if(mysqli_query($link, $catchap_query)){
+    $catchap_query_result = mysqli_query($link, $catchap_query);
+    
+    if(mysqli_num_rows($catchap_query_result) < 1){
+        $error_message = "You cannot delete a quiz of a chapter, as you have not uploaded any educational content yet.";
+        $styleDisappear = '"display:none;"';
+        $chapterExist = False;
+    }
+}else{
+    $error_message = "Sorry, an error occurred connecting to the database. Please, try again later.";
+    $styleDisappear = "'display:none;'";
+    $chapterExist = "error";
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $chapter_id = $_POST['identifier'];
+  $query = "DELETE FROM smiledatabase.quiz WHERE chapter_id='$chapter_id'";
+
+  if(mysqli_query($link, $query)){
+        $validSubmission = True;
+        header("location: deleteEducationalContentQuiz.php?success='True'");
+  }
+  else{
+    $validSubmission = False;
+      $error_message = "*An error ocurred attempting to delete the SmileQuiz. Please, try later again.";
+  }
+}
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Integrating the Bootstrap CSS Library-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="SmileCustom.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+    <title>Delete Educational Quiz</title>
+  </head>
+  <body>
+  <?php include_once "pageTop.php"; ?>
+    <div class = "container" style = "margin-top:30px">
+    <?php
+        //Displays, in case of a successful or a faulty error form submission.
+            if(isset($_GET['success'])=="True"){
+                $validSubmission = True;
+            }
+            if($validSubmission === True){
+                echo '<div class="alert alert-success">
+                            <small><strong>The quiz has been successfully deleted from the database!</strong></small>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>';
+                $validSubmission = "";
+            }
+            elseif($validSubmission === False){
+                echo '<div class="alert alert-danger">
+                            <small><strong>'.$error_message.'</strong></small>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>';
+                $validSubmission = "";
+            }else{
+                echo '';
+            }
+    //Displays, in case an no chapters have been created yet or an error occurred retrieving those
+        if($chapterExist === False){
+            echo '<div class="row justify-content-center">
+                  <div class="col-sm-3" style="margin-top:100px; text-align: center;">
+                    <h3 style="color:#d6efff">Manage Content</h3>
+                    <svg class="bi bi-caret-down" width="3.5em" height="3.5em" viewBox="0 0 16 16" fill="currentColor" style="color:#6ac5fe;"  xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M3.204 5L8 10.481 12.796 5H3.204zm-.753.659l4.796 5.48a1 1 0 001.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 00-.753 1.659z" clip-rule="evenodd"/>
+                    </svg>
+                    <h3 style="color:#6ac5fe">Manage <kbd style="background-color: #6ac5fe">Smile</kbd>&nbsp;Quizzes</h3>
+                </div>
+                <div class="col-sm-9" style="margin-top:150px">
+                    <div class="alert alert-secondary" style="text-align: center;">
+                        <h6><strong>'.$error_message.'</strong></h6>
+                    </div>
+                </div>
+                </div>';
+            $chapterExist = "";
+        }
+        elseif($chapterExist == "error"){
+            echo '<div class="row justify-content-center">
+                    <div class="col-sm-3" style="margin-top:100px; text-align: center;">
+                        <h3 style="color:#d6efff">Manage Content</h3>
+                        <svg class="bi bi-caret-down" width="3.5em" height="3.5em" viewBox="0 0 16 16" fill="currentColor" style="color:#6ac5fe;"  xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M3.204 5L8 10.481 12.796 5H3.204zm-.753.659l4.796 5.48a1 1 0 001.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 00-.753 1.659z" clip-rule="evenodd"/>
+                        </svg>
+                        <h3 style="color:#6ac5fe">Manage <kbd style="background-color: #6ac5fe">Smile</kbd>&nbsp;Chapters</h3>
+                    </div>
+                <div class="col-sm-9" style="margin-top:150px">
+                    <div class="alert alert-danger" style="text-align: center;">
+                        <h6><strong>'.$error_message.'</strong></h6>
+                    </div>
+                </div>
+                </div>';
+            $chapterExist = "";
+        }else{
+            echo '';
+        }
+      ?>
+    <div class="row justify-content-center" style=<?php echo $styleDisappear; ?>>
+        <div class="col-sm-3" style="margin-top:160px; text-align: center;">
+          <h3 style="color:#d6efff">Manage Content</h3>
+          <svg class="bi bi-caret-down" width="3.5em" height="3.5em" viewBox="0 0 16 16" fill="currentColor" style="color:#6ac5fe;"  xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M3.204 5L8 10.481 12.796 5H3.204zm-.753.659l4.796 5.48a1 1 0 001.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 00-.753 1.659z" clip-rule="evenodd"/>
+          </svg>
+          <h3 style="color:#6ac5fe">Manage <kbd style="background-color: #6ac5fe">Smile</kbd>&nbsp;Quizzes</h3>
+        </div>
+            <div class="col-sm-9" style="margin-top:30px">
+                <div class = "jumbotron rounded-lg" style = "padding-top:0;padding-right:0;padding-left:0; margin-top:30px; padding-bottom:10px; background-color:white; border: solid; border-color:#6ac5fe; border-width: 4px;">
+                    <div class = "jumbotron jumbotron-fluid" style="background-color:#6ac5fe; padding-top:10px; padding-bottom:5px; text-align: center" >
+                    <h2 style = "color:white">Smile Quizzes</h2>
+                </div>
+                <?php
+                if($catchap_query_result == TRUE){
+                  if (mysqli_num_rows($catchap_query_result) >= 1){
+                    $counter = 0;  
+                    echo
+                          '<div style="display: block; max-height: 400px; overflow-y: auto;  margin-top: 40px; margin-bottom: 20px; margin-left: 40px; margin-right: 40px;">
+                          <table id="userTable" align = "center" class="table table-hover" style = "background-color:#f8f9fa; border-width: 4px;">
+                          <thead>
+                          <tr style="text-align: center;">
+                            <th align="left" scope="col">Category&nbsp;Name</th>
+                            <th align="left" scope="col">Chapter&nbsp;Title</th>
+                            <th align="left" scope="col">Chapter&nbsp;Number</th>
+                            <th align="left" scope="col">Action</th>
+                          </tr>
+                          </thead>
+                          <tbody>';
+                      while ($row_quizzes = mysqli_fetch_array($catchap_query_result))
+                        {
+                          $counter++;
+                          echo'<tr class=""table table-hover">
+                                <td align="center">'.$row_quizzes['category_name'].'</td>
+                                <td align="center">'.$row_quizzes['chapter_title'].'</td>
+                                <td align="center">'.$row_quizzes['chapter_number'].'</td>
+                                <td align="center">
+                                  <form id="contentForm" method="POST" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'" enctype="multipart/form-data" autocomplete="off">
+                                    <input type="hidden" id="identifier" name="identifier" value="'.$row_quizzes['quizChapterID'].'">
+                                    <button class="btn btn-primary" type="submit" style="background-color: #ffffff !important;"><img src="images/delete.png" style="height: 30px; widht: 30px; object-fit: contain;" alt="Delete Image"></button>
+                                    </form>
+                                </td>
+                              </tr>';      
+                          }
+                      echo '</tbody>
+                            </table>
+                            </div>';  
+                    }
+                }
+                ?>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+       <!-- Integrating Javascript library from Bootstrap (jQuery, Popper.js and Javascript sublibraries)-->
+       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+    <script>
+      $(document).ready( function () {
+        $('#userTable').DataTable();
+      } );
+    </script>
+    <?php include "pageFooter.php"; ?>
+  </body>
+</html>

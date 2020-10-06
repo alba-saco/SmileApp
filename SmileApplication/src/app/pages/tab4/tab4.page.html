@@ -1,0 +1,68 @@
+<ion-header style="box-shadow: none">
+  <ion-img src = "../assets/img/header_blank.jpg"></ion-img>
+  <ion-title style="transform: translate(-50%, -50%); position: absolute; top: 50%; left: 50%; color:white; font-size: 200%; font-family: 'Lucida Console', Monaco, monospace"> &nbsp;Gum Health <br> Questionnaire</ion-title>
+
+  <ion-fab vertical="top" horizontal = "end">
+    <ion-fab-button (click)="settings()" style="--background: none; --box-shadow: none">
+      <ion-img src="../assets/img/gear.png" style="width: 50% ; height: auto"></ion-img>
+    </ion-fab-button>
+  </ion-fab>
+</ion-header>
+
+<ion-content class="form-content">
+  <form [formGroup]="scoreForm" (ngSubmit)="submitAnswer(scoreForm.value)">
+    <ion-radio-group *ngFor="let i of questions | slice:0:1; let ind = index" id="{{ ind+1 }}" formControlName="score{{ ind+1 }}" required>
+      <div style="border-style: solid; border-color: #6AC5FE; padding: 3%; margin: 3%">
+        <ion-item lines="none">
+          <ion-img src="../assets/img/survey_icon.png" style="width: 6%; height: auto;"></ion-img>
+          <ion-text>&nbsp;Q{{ ind+1 }}</ion-text>
+        </ion-item>
+        <ion-item style="text-align: justify;" lines="none">{{ i }}</ion-item>
+        <ion-item style="margin-top: 0%;" lines="none" *ngFor="let j of answers; let in = index">
+          <ion-label>{{ j }}</ion-label>
+          <ion-radio value="{{ in }}" type="text"></ion-radio>
+        </ion-item>
+      </div>
+    </ion-radio-group>
+    <ion-radio-group *ngFor="let i of questions | slice:1:2; let ind = index" id="{{ ind+2 }}" formControlName="score{{ ind+2 }}" required>
+      <div style="border-style: solid; border-color: #6AC5FE; padding: 3%; margin: 3%">
+        <ion-item lines="none">
+          <ion-img src="../assets/img/survey_icon.png" style="width: 6%; height: auto;"></ion-img>
+          <ion-text>&nbsp;Q{{ ind+2 }}</ion-text>
+        </ion-item>
+        <ion-item style="text-align: justify;" lines="none">{{ i }}</ion-item>
+        <ion-item style="margin-top: 0%;" lines="none" *ngFor="let j of answer_2; let in = index">
+          <ion-label>{{ j }}</ion-label>
+          <ion-radio value="{{ in }}" type="text"></ion-radio>
+        </ion-item>
+      </div>
+    </ion-radio-group>
+    <ion-radio-group *ngFor="let i of questions | slice:2:6; let ind = index" id="{{ ind+3 }}" formControlName="score{{ ind+3 }}" required>
+      <div style="border-style: solid; border-color: #6AC5FE; padding: 3%; margin: 3%">
+        <ion-item lines="none">
+          <ion-img src="../assets/img/survey_icon.png" style="width: 6%; height: auto;"></ion-img>
+          <ion-text>&nbsp;Q{{ ind+3 }}</ion-text>
+        </ion-item>
+        <ion-item style="text-align: justify;" lines="none">{{ i }}</ion-item>
+        <ion-item style="margin-top: 0%;" lines="none" *ngFor="let j of answers; let in = index">
+          <ion-label>{{ j }}</ion-label>
+          <ion-radio value="{{ in }}" type="text"></ion-radio>
+        </ion-item>
+      </div>
+    </ion-radio-group>
+    <ion-radio-group *ngFor="let i of questions | slice:6:8; let ind = index" id="{{ ind+7 }}" formControlName="score{{ ind+7 }}" required>
+      <div style="border-style: solid; border-color: #6AC5FE; padding: 3%; margin: 3%">
+        <ion-item lines="none">
+          <ion-img src="../assets/img/survey_icon.png" style="width: 6%; height: auto;"></ion-img>
+          <ion-text>&nbsp;Q{{ ind+7 }}</ion-text>
+        </ion-item>
+        <ion-item style="text-align: justify;" lines="none">{{ i }}</ion-item>
+        <ion-item style="margin-top: 0%;" lines="none" *ngFor="let j of answer_7_8; let in = index">
+          <ion-label>{{ j }}</ion-label>
+          <ion-radio value="{{ in }}" type="text"></ion-radio>
+        </ion-item>
+      </div>
+    </ion-radio-group>
+    <ion-button type="submit" style="float: right; margin-right: 7%; margin-bottom: 3%;" color="light">Submit</ion-button>
+  </form>
+</ion-content>

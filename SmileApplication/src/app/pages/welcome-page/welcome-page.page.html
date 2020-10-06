@@ -1,0 +1,28 @@
+<ion-header style="background:#fff; box-shadow: none;">
+    <ion-img src="../assets/img/smile_logo.jpg" style="margin-left: auto; margin-top: 5%; margin-right: auto; width: 40%; height: auto; box-shadow: none;"></ion-img>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row style="margin-top: 0%">
+            <p style="color: #6ac5fe; margin-left: auto; margin-right: auto; text-align: center; font-size: 200%;">Welcome to Smile!</p>
+        </ion-row>
+        <ion-row style="margin-top: 3%">
+            <p style="color: black; margin-left: 13%; font-size: 75%;">Email address: </p>
+            <ion-input style="margin-left: 10px; font-size: 75%" placeholder="Please enter your email" autocomplete="off" type="email" name="email" [(ngModel)]="credential.email"></ion-input>
+        </ion-row>
+        <ion-row style="margin-top: 1%">
+            <p style="color: black; margin-left: 13%; font-size: 75%;">Password: </p>
+            <ion-input style="margin-left: 10px; font-size: 75%" placeholder="Please enter your password" autocomplete="off" type="password" name="password" [(ngModel)]="credential.password"></ion-input>
+        </ion-row>
+        <ion-row style="margin-top: 3%">
+            <ion-button [disabled]="validateInputs() !== true" (click)="loginAction()" expand="block" size="large" style="margin-top: 30px; margin-left: auto; margin-right: auto; color: white; --border-color: #6ac5fe; --background: #6ac5fe"> Login </ion-button>
+        </ion-row>
+        <ion-row style="margin-top: 3%">
+            <ion-item style="margin-left: auto; margin-right: auto; text-align: center;" lines="none">
+                <p style="color: black; font-size: 75%;">First time user?</p>
+                <p (click)="register()" style="color: blue; margin-left: 10px; margin-right: auto; text-decoration: underline; font-size: 75%;">Register here</p>
+            </ion-item>
+        </ion-row>
+    </ion-grid>
+</ion-content >

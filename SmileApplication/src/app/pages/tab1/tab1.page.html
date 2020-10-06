@@ -1,0 +1,100 @@
+<!-- The circle-progress tag and its styling methods have been adopted from https://bootsoon.github.io/ng-circle-progress/ -->
+<ion-header translucent>
+  <ion-img src = "../assets/img/smile_header.JPG" style="box-shadow: none;"></ion-img>
+  <ion-fab vertical="top" horizontal = "end">
+      <ion-fab-button (click)="settings()" style="--background: none; --box-shadow: none">
+          <ion-img src="../assets/img/gear.png" style="width: 50% ; height: auto"></ion-img>
+      </ion-fab-button>
+  </ion-fab>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="timerOn == false; else TimerRunning">
+  <ion-grid>
+    <ion-row>
+      <p style="margin-left: auto; margin-right: auto; text-align: center; font-size: 130%;">Welcome back {{ this.userName$.value }}!</p>
+    </ion-row>
+    <ion-row>
+      <p style="margin-left: auto; margin-right: auto; text-align: center; margin-top: 0%; font-size: 170%;">Toothbrush Timer</p>
+    </ion-row>
+    <ion-row>
+      <ion-fab-button (click)="initiateTimer()" style="--background: none; --box-shadow: none; margin-left: auto; margin-right: auto; width: 230px; height: 230px; --background-focused: white; --background-activated: white;">
+       <ion-icon name="play-circle" style="margin-left: auto; margin-right: auto; font-size: 2000%;" color="SmileAppCol"></ion-icon>
+      </ion-fab-button>
+    </ion-row>
+    <ion-row>
+      <ion-card style = "margin-top: 0px; margin-left: auto; margin-right: auto; width: 90%;">
+        <ion-card-header>
+          <ion-card-title style= "font-size: 168%; font-family:'Lucida Console', Monaco, monospace;">Did you know...</ion-card-title>
+        </ion-card-header>
+        <ion-card-content style="padding-top: 0px; font-family:'Lucida Console', Monaco, monospace;">
+          {{currentFact}}
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+</ng-container>
+  <ng-template #TimerRunning>
+    <ion-grid>
+      <ion-row> 
+        <ion-badge  color ="SmileAppCol" style=" word-wrap: normal; text-align: center; margin-top: 5%; margin-bottom: 5%; margin-left: auto; margin-right: auto; font-size: 115%;" [innerHTML] = "currentMessage">{{currentMessage}}</ion-badge>
+      </ion-row>
+      <ion-row>
+        <circle-progress style="margin-left: auto; margin-right: auto; height: 45%; width: 45%;"
+          [percent]="percent"
+          [maxPercent]="100"
+          [radius]="radius"
+          [showTitle]="true"
+          [showSubtitle]="false"
+          [showUnits]="false"
+          [outerStrokeWidth]="16"
+          [outerStrokeColor]="'#F6FFF2'"
+          [showZeroOuterStroke]="false"
+          [showInnerStroke]="false"
+          [backgroundStroke]="'#6ac5fe'"
+          [backgroundStrokeWidth]="3"
+          [outerStrokeGradient]="true"
+          [outerStrokeGradientStopColor]="'#1D8251'"
+          [title]="fullTime"
+          [titleFontSize]="40">
+        </circle-progress>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        <div  class="centre-button">
+          <ng-container *ngIf = "timerPaused == true; else running">
+            <ion-fab-button (click) = "startTimer()" style="--background: #6ac5fe;">
+              <ion-img src="../assets/img/play_button_transparent.png" style="width: 35% ; height: auto"></ion-img>
+             </ion-fab-button>
+          </ng-container>
+          <ng-template #running>
+             <ion-fab-button (click)= "stopTimer()" style="--background: #6ac5fe;">
+              <ion-img src="../assets/img/pause_button_transparent.png" style="width: 35% ; height: auto"></ion-img>
+              </ion-fab-button>
+          </ng-template>
+        </div>
+      </ion-col>
+      <ion-col size = "6">
+        <div  class="centre-button">
+        <ion-fab-button (click)="exitTimer()" style="--background: #6ac5fe;">
+          <ion-icon name="close-circle-outline"></ion-icon>
+        </ion-fab-button>
+      </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ng-container *ngIf = "timerStart == false; else brushImage">
+        <ion-img src="../assets/img/744520.gif" style="margin-left: auto; margin-right: auto; height: auto; width: 35%;"></ion-img>
+        </ng-container>
+      <ng-template #brushImage>
+      <ng-container *ngIf = "timerDone == false && timerStart == true; else finished">
+      <ion-img src="../assets/img/744458.gif" style="margin-left: auto; margin-right: auto; height: auto; width: 25%;"></ion-img>
+      </ng-container>
+      <ng-template #finished>
+        <ion-img src="../assets/img/Party_emoji.svg" style="margin-left: auto; margin-right: auto; height: 25%; width: 25%"></ion-img>
+      </ng-template>
+    </ng-template>
+    </ion-row>
+    </ion-grid>
+  </ng-template>  
+</ion-content>

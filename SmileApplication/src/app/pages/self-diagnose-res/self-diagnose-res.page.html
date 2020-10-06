@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-title style="background-color:#d8d8d8; padding: 1%">
+      <ion-item color="#d8d8d8" lines="none">
+          <p style="margin-left: auto; margin-right: auto; color: #6AC5FE; font-size: 34px"> &nbsp;Gum Health <br> Questionnaire</p>
+      </ion-item>
+  </ion-title>
+  <ion-fab vertical="top" horizontal="start">
+      <ion-fab-button style="--background: none; --box-shadow: none; --color: #6ac5fe;">
+        <ion-icon (click)="back()" name="arrow-back"></ion-icon>
+      </ion-fab-button>
+  </ion-fab>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let j of msg_list; let ind = index" style="border-style: solid; border-color: #6AC5FE; padding: 3%; margin: 2%;">
+    <ion-item lines="none">
+      <ion-img src="../assets/img/msg.png" style="width: 7%; height: auto;"></ion-img>
+      <p>&nbsp;{{ ind+1 }}.</p>
+    </ion-item>
+    <ion-item style="margin-top: -3%; text-align: start; padding: 0%;" lines="none">
+      <p style="margin: 1%;">&nbsp; {{ j }}</p>
+    </ion-item>
+  </div>
+  <ion-item-divider style="border-color: #6AC5FE;"></ion-item-divider>
+  <ion-item style="margin-top: 3%; margin-bottom: 2%; font-size: 70%; color: grey; text-align: justify;" lines="none">
+  References
+  <br>
+  1.	Eke, P. and R. Genco, CDC Periodontal Disease Surveillance Project: Background, Objectives, and Progress Report. Journal of Periodontology, 2007. 78(7): p. 1366-1371.
+  <br>
+  2.	Eke, P.I. and B. Dye, Assessment of self‐report measures for predicting population prevalence of periodontitis. Journal of periodontology, 2009. 80(9): p. 1371-1379.
+  </ion-item>
+</ion-content>

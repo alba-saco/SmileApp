@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-title style="background-color:#d8d8d8">
+    <ion-item color="#d8d8d8" lines="none">
+      <ion-buttons fill="clear" size="small" slot="start">
+        <ion-back-button style="--color: #6AC5FE"></ion-back-button>
+      </ion-buttons>
+      <p style="color: #6AC5FE; font-size: 34px">Chapter {{(chapter | async)?.chapter_number}}</p>
+    </ion-item>
+  </ion-title>
+</ion-header>
+
+<ion-content style="overflow: scroll">
+  <h3 style="color: #6AC5FE; text-align: center; font-family: 'Lucida Console', Monaco, monospace; text-decoration: underline; font-size: 25px">Quiz: {{(chapter | async)?.chapter_title}}</h3>
+
+  <div style="border-style: solid; border-color: black; padding-left: 10px; padding-right: 10px; padding-bottom: 10px; margin: 10px">
+    <h3 style="text-align: center">
+      <span *ngIf = "score == 5">Congratulations!</span>
+      You got {{score}}/5!
+    </h3>
+    <ion-img src="../assets/img/party.png" slot="start" style="width: 30% ; height: auto; margin-left: auto; margin-right: auto; margin-top: 20px"></ion-img>
+    <h5 style="text-align: center">Solutions:</h5>
+    <div *ngFor="let problem of questionList">
+      <p style="font-weight: bold; font-size: 20px">Question {{problem.questionNo}}:</p>
+      <p>{{problem.question}}</p>
+      <p><span style="font-weight: bold">Answer: </span>{{problem.ans}}</p>
+    </div>
+  </div>
+
+<ion-content>
+
+</ion-content>

@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-title style="background-color:#d8d8d8;">
+    <ion-item color="#d8d8d8" lines="none">
+      <ion-buttons fill="clear" size="small" slot="start">
+        <ion-back-button style="--color: #6AC5FE"></ion-back-button>
+      </ion-buttons>
+      <p style="color: #6AC5FE; font-size: 34px; font-family: 'Lucida Console', Monaco, monospace">{{(categoryName | async)?.category_name}}</p>
+    </ion-item>
+  </ion-title>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+      <ion-item [routerLink]="['quiz', chapter.chapter_id]" *ngFor="let chapter of chapterList">
+        <ion-img src= "{{chapter.chapter_image_url}}" slot="start" style="width: 75px ; height: 75px"></ion-img>
+        <ion-label>
+          <h3 style="color: #525051; font-family: 'Lucida Console', Monaco, monospace; font-weight: bold"> Chapter {{chapter.chapter_number}} </h3>
+          <h5 style="font-size: 12px; color: #525051; font-family: 'Lucida Console', Monaco, monospace; font-weight: bold">{{chapter.chapter_title}} </h5>
+        </ion-label>
+        <ion-img src="../assets/img/next.png" slot="end" style="width: 5% ; height: auto"></ion-img>
+      </ion-item>
+  </ion-list>
+</ion-content>

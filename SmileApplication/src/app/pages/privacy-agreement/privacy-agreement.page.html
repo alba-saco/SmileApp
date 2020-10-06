@@ -1,0 +1,20 @@
+<ion-header style="background:#fff">
+    <ion-img src="../assets/img/smile_logo.jpg" style="margin-left: auto; margin-top: 5%; margin-right: auto; width: 40%; height: auto; box-shadow: none;"></ion-img>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row style="margin-top: 5%">
+            <p style="color: #6ac5fe; margin-left: auto; margin-right: auto; font-size: 110%; text-align: center;">We take your privacy seriously</p>
+        </ion-row>
+        <ion-row style="margin-top: 7%">
+            <p style="color: black; margin-left: auto; margin-right: auto; text-align: center; font-size: 75%;">Learn more about our privacy agreement </p>
+        </ion-row>
+        <ion-row style="margin-top: 3%">
+            <p (click)="privacyAgreement()" style="color: blue; margin-left: auto; margin-right: auto; text-align: center; text-decoration: underline; font-size: 75%;">here</p>
+        </ion-row>
+        <ion-row>
+            <ion-button (click)="setreminder()" expand="block" size="large" style="margin-top: 10%; margin-left: auto; margin-right: auto; color: white; --border-color: #6ac5fe; --background: #6ac5fe; font-family: 'Lucida Console', Monaco, monospace;"> Accept & Continue </ion-button>
+        </ion-row>
+    </ion-grid>
+</ion-content>
